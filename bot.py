@@ -171,7 +171,7 @@ class MyClient(discord.Client):
         
         #UTILITY
         if message.content.lower().startswith("!help"):
-            embed=discord.Embed(title="Help du bot", url="https://github.com/CharlesAttend/MIASHS-DiscordBot", description="Petit appercu de ce petit bot un peu useless ", color=0xffc800)
+            embed=discord.Embed(title="Help du bot", description="Petit appercu de ce petit bot un peu useless (https://github.com/CharlesAttend/MIASHS-DiscordBot)", color=0xffc800)
             embed.add_field(name="memes", value="`wtf` | `fbi` | `police` | `excuse me wtf` | `eh eh boi`", inline=True)
             embed.add_field(name="Minecraft (y'a plus de serveur pour l'instant)", value="`comment va le serveur ?`", inline=False)
             embed.add_field(name="Utility", value="`salut le bot` | `!help`", inline=True)
