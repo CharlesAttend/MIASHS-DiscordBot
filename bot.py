@@ -152,26 +152,26 @@ class MyClient(discord.Client):
         
         #MEMES
         if message.content.lower().startswith("wtf"):
-            imgList3= ["wtf.gif", "wtf2.gif"]
+            imgList3= ["img/wtf.gif", "img/wtf2.gif"]
             await message.channel.send(file=discord.File(choice(imgList3)))
         #
         if message.content.lower().startswith("fbi"):
-            await message.channel.send(file=discord.File("fbi.gif"))
+            await message.channel.send(file=discord.File("img/fbi.gif"))
         #
         if message.content.lower().startswith("police"):
-            await message.channel.send(file=discord.File("police.jpg"))
+            await message.channel.send(file=discord.File("img/police.jpg"))
         #
         if message.content.lower().startswith("excuse me wtf"):
-            imgList1 = ["excuseme.jpg", "excuseme3.jpg","excuseme2.jpg"]
+            imgList1 = ["img/excuseme.jpg", "img/excuseme3.jpg","img/excuseme2.jpg"]
             await message.channel.send(file=discord.File(choice(imgList1)))
         #
         if message.content.lower().startswith("eh eh boi"):
-            imgList = ["eh eh boi1.webp", "eh eh boi2.jpg", "eh eh boi3.gif","eh eh boi4.png", "eh eh boi5.gif"]
+            imgList = ["img/eh eh boi1.webp", "img/eh eh boi2.jpg", "img/eh eh boi3.gif","img/eh eh boi4.png", "img/eh eh boi5.gif"]
             await message.channel.send(file=discord.File(choice(imgList)))
         
         #UTILITY
         if message.content.lower().startswith("!help"):
-            embed=discord.Embed(title="Help du bot", description="Petit appercu de ce petit bot un peu useless ", color=0xffc800)
+            embed=discord.Embed(title="Help du bot", url="https://github.com/CharlesAttend/MIASHS-DiscordBot", description="Petit appercu de ce petit bot un peu useless ", color=0xffc800)
             embed.add_field(name="memes", value="`wtf` | `fbi` | `police` | `excuse me wtf` | `eh eh boi`", inline=True)
             embed.add_field(name="Minecraft (y'a plus de serveur pour l'instant)", value="`comment va le serveur ?`", inline=False)
             embed.add_field(name="Utility", value="`salut le bot` | `!help`", inline=True)
@@ -198,6 +198,6 @@ class MyClient(discord.Client):
             else:
                 await message.channel.send("T'as pas le droit cheh")
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 client = MyClient()
-client.run('token')
+client.run('token here eheh')
