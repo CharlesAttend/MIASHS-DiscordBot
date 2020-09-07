@@ -53,6 +53,7 @@ class MyClient(discord.Client):
             await member.create_dm()
         else:    
             await member.dm_channel.send(message)
+        print("Sended message to {} : {}".format(member.name, message))
 
     async def setrole(self, memberId, role_name):
         guild = discord.Client.get_guild(self, 622098638033780747)
@@ -118,6 +119,7 @@ class MyClient(discord.Client):
                     await self.setrole(payload.user_id, "L3")
                 elif payload.emoji.name == "🤓":
                     await self.setrole(payload.user_id, "Non-Miashs")
+                print("{} clicked on a reaction".format(payload.member.user))
 
     async def on_raw_reaction_remove(self, payload):
         one = "1⃣"
@@ -166,7 +168,7 @@ class MyClient(discord.Client):
             await message.channel.send(file=discord.File(choice(imgList1)))
         #
         if message.content.lower().startswith("eh eh boi"):
-            imgList = ["img/eh eh boi1.webp", "img/eh eh boi2.jpg", "img/eh eh boi3.gif","img/eh eh boi4.png", "img/eh eh boi5.gif"]
+            imgList = ["img/eh eh boi1.webp", "img/eh eh boi2.jpg", "img/eh eh boi3.gif","img/eh eh boi4.png"]
             await message.channel.send(file=discord.File(choice(imgList)))
         
         #UTILITY
