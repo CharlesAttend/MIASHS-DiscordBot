@@ -1,7 +1,7 @@
 # -*- coding: utf_8 -*-
 
 import discord, logging
-
+import config
 import json, urllib.request
 from random import choice
 
@@ -200,4 +200,4 @@ class MyClient(discord.Client):
 
 logging.basicConfig(level=logging.INFO)
 client = MyClient()
-client.run('token here eheh')
+client.run(config.token)
