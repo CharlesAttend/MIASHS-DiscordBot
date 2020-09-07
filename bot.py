@@ -51,6 +51,7 @@ class MyClient(discord.Client):
         """
         if member.dm_channel == None:
             await member.create_dm()
+            await member.dm_channel.send(message)
         else:    
             await member.dm_channel.send(message)
         print("Sended message to {} : {}".format(member.name, message))
@@ -59,7 +60,7 @@ class MyClient(discord.Client):
         guild = discord.Client.get_guild(self, 622098638033780747)
         roleTD = {
             "SC": discord.utils.get(guild.roles, id=622725595976957955),
-            "Eco": discord.utils.get(guild.roles, id=622725736213774347),
+            "Eco": discord.utils.get(guild.roles, id=738833398096986134),
             "L1": discord.utils.get(guild.roles, id=738818487480483920),
             "L2": discord.utils.get(guild.roles, id=738818587292074104),
             "L3": discord.utils.get(guild.roles, id=738833214021566556),
@@ -67,14 +68,14 @@ class MyClient(discord.Client):
         }
         member = discord.utils.get(guild.members, id=memberId)
         await member.add_roles(roleTD[role_name])
-        await self.sendDM(member, "Rôle atribué: " + str(roleTD[role_name].name))
-        print("Role set for"+ member.name)
+        await self.sendDM(member, "Rôle atribué: {}".format(str(roleTD[role_name].name)))
+        print("Role set for "+ member.name)
     
     async def removeRole(self, memberId, role_name):
         guild = discord.Client.get_guild(self, 622098638033780747)
         roleTD = {  
             "SC":discord.utils.get(guild.roles, id=622725595976957955),
-            "Eco":discord.utils.get(guild.roles, id=622725736213774347),
+            "Eco":discord.utils.get(guild.roles, id=738833398096986134),
             "L1": discord.utils.get(guild.roles, id=738818487480483920),
             "L2": discord.utils.get(guild.roles, id=738818587292074104),
             "L3": discord.utils.get(guild.roles, id=738833214021566556),
@@ -85,9 +86,9 @@ class MyClient(discord.Client):
             if r == roleTD[role_name]:
                 await member.remove_roles(roleTD[role_name])
                 await self.sendDM(member, "Rôle suprimé : " + str(roleTD[role_name].name))
-                print("Role remove for {}".format(member.mention))
+                print("Role remove for {}".format(member.user))
                 return
-        await self.sendDM(member, "Petit bug ?? t'a pas le rôle à remove, pas grave réessaye")
+        await self.sendDM(member, "Petit bug, tu devais pas avoir le rôle à remove, pas grave réessaye ;)")
 
     async def on_ready(self):
         print('Logged on as {0}!'.format(self.user))
@@ -119,7 +120,6 @@ class MyClient(discord.Client):
                     await self.setrole(payload.user_id, "L3")
                 elif payload.emoji.name == "🤓":
                     await self.setrole(payload.user_id, "Non-Miashs")
-                print("{} clicked on a reaction".format(payload.member.user))
 
     async def on_raw_reaction_remove(self, payload):
         one = "1⃣"
