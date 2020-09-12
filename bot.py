@@ -54,7 +54,7 @@ class MyClient(discord.Client):
             await member.dm_channel.send(message)
         else:    
             await member.dm_channel.send(message)
-        print("Sended message to {} : {}".format(member.name, message))
+        logging.info("Sended message to {} : {}".format(member.name, message))
 
     async def setrole(self, memberId, role_name):
         guild = discord.Client.get_guild(self, 622098638033780747)
@@ -69,7 +69,7 @@ class MyClient(discord.Client):
         member = discord.utils.get(guild.members, id=memberId)
         await member.add_roles(roleTD[role_name])
         await self.sendDM(member, "Rôle atribué: {}".format(str(roleTD[role_name].name)))
-        print("Role set for "+ member.name)
+        logging.info("Role set for "+ member.name)
     
     async def removeRole(self, memberId, role_name):
         guild = discord.Client.get_guild(self, 622098638033780747)
@@ -86,12 +86,12 @@ class MyClient(discord.Client):
             if r == roleTD[role_name]:
                 await member.remove_roles(roleTD[role_name])
                 await self.sendDM(member, "Rôle suprimé : " + str(roleTD[role_name].name))
-                print("Role remove for {}".format(member.user))
+                logging.info("Role remove for {}".format(member.user))
                 return
         await self.sendDM(member, "Petit bug, tu devais pas avoir le rôle à remove, pas grave réessaye ;)")
 
     async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+        logging.info('Logged on as {0}!'.format(self.user))
     
     async def on_member_join(self, member):
         await self.get_channel(623826045186998313).send("Yo @ {} ! Check les règles et choisis tes rôles dans #rôles".format(member.mention))
@@ -142,7 +142,7 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.author == self.user:
             return
-        print('Message from {0.author}: {0.content}'.format(message))
+        logging.info('Message from {0.author}: {0.content}'.format(message))
 
         #MINECRAFT
         if message.content.lower().startswith("comment va le serveur ?"):
@@ -191,7 +191,7 @@ class MyClient(discord.Client):
             if discord.utils.get(discord.Client.get_guild(self, 622098638033780747).roles, id=622103979366547457) in message.author.roles:
                 number = int(message.content.split(" ")[1])
                 deleted = await message.channel.purge(limit=number + 1) # + the command message
-                print(deleted)
+                logging.info(deleted)
                 await message.channel.send(content='Deleted {} message(s)'.format(len(deleted)), delete_after=3)
             else:
                 await message.channel.send("T'as pas le droit cheh")
