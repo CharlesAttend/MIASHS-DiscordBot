@@ -101,11 +101,9 @@ class MyClient(discord.Client):
         await self.get_channel(622098638033780749).send("ptdr bye {}".format(self.getMember(member.id)))
     
     async def on_raw_reaction_add(self, payload):
-        one = "1⃣"
-        two = "2⃣"
-        three ="3⃣"
-        four = "4⃣"
-        five = "5⃣"
+        one = "1️⃣"
+        two = "2️⃣"
+        three ="3️⃣"
         if payload.channel_id == 622456569543524352:
             if payload.message_id == 622715864722046987: #MIASH Majeur
                 if payload.emoji.name == "🤔":
@@ -122,11 +120,9 @@ class MyClient(discord.Client):
                     await self.setrole(payload.user_id, "Non-Miashs")
 
     async def on_raw_reaction_remove(self, payload):
-        one = "1⃣"
-        two = "2⃣"
-        three ="3⃣"
-        four = "4⃣"
-        five = "5⃣"
+        one = "1️⃣"
+        two = "2️⃣"
+        three ="3️⃣"
         if payload.channel_id == 622456569543524352:
             if payload.message_id == 622715864722046987: #MIASH Majeur
                 if payload.emoji.name == "🤔":
