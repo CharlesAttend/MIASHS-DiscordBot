@@ -6,6 +6,10 @@ import json, urllib.request
 from random import choice
 
 class MyClient(discord.Client):
+    def __init__(self):
+        super().__init__()
+        self.mutedUser = []
+    
     def extractJson(self):
         """
         Get minecraft server status from omgserv api
@@ -33,16 +37,19 @@ class MyClient(discord.Client):
             return msg
         except:
             return "`SERVER DOWN @Charles#9412"
-          
+        
     def getMember(self, memberId):
         """
         Get member by id
         """
+        logger.info("getmember launched")
         members = self.get_all_members()
         for m in members:
             if m.id ==memberId:
+                logger.info("Member Found")
                 return m
             else:
+                logger.info("Member not found")
                 return None
 
     async def sendDM(self, member, message):
@@ -94,11 +101,11 @@ class MyClient(discord.Client):
         logger.info('Logged on as {0}!'.format(self.user))
     
     async def on_member_join(self, member):
-        await self.get_channel(623826045186998313).send("Yo @ {} ! Check les règles et choisis tes rôles dans #rôles".format(member.mention))
+        await self.get_channel(623826045186998313).send("Yo {} ! Check les règles et choisis tes rôles dans #rôles".format(member.mention))
         await self.get_channel(623826045186998313).send("")
 
     async def on_member_remove(self, member):
-        await self.get_channel(622098638033780749).send("ptdr bye {}".format(self.getMember(member.id)))
+        await self.get_channel(622098638033780749).send("ptdr bye {}".format(member.name))
     
     async def on_raw_reaction_add(self, payload):
         one = "1️⃣"
@@ -143,6 +150,24 @@ class MyClient(discord.Client):
         if message.author == self.user:
             return
         logger.info('Message from {0.author}: {0.content}'.format(message))
+        
+        #MUTE 
+        if message.content.startswith("!unmute"):
+            if message.author.id == 102706746392313856:
+                id = message.content.split(' ')[1]
+                self.mutedUser.remove(int(id))
+                logger.info("Unmuted user {}".format(id))
+
+        if message.content.startswith("!mute"):
+            id = message.content.split(' ')[1]
+            self.mutedUser.append(int(id))
+            logger.info("Muted user {}".format(id))
+
+        if message.author.id in self.mutedUser:
+            await message.delete()
+            await self.sendDM(message.author, "Tu es mute")
+            logger.info("Deleted message from muted user {} with id {}".format(message.author.name, message.author.id))
+        
 
         #MINECRAFT
         if message.content.lower().startswith("comment va le serveur ?"):
@@ -173,16 +198,15 @@ class MyClient(discord.Client):
             embed.add_field(name="memes", value="`wtf` | `fbi` | `police` | `excuse me wtf` | `eh eh boi`", inline=True)
             embed.add_field(name="Minecraft (y'a plus de serveur pour l'instant)", value="`comment va le serveur ?`", inline=False)
             embed.add_field(name="Utility", value="`salut le bot` | `!help`", inline=True)
-            embed.add_field(name="Admin", value="`idtouser` | `plscleanchan` | `!mute`", inline=True)
+            embed.add_field(name="Admin", value="`idtouser` | `plscleanchan` | `!mute/!unmute + id`", inline=True)
             embed.set_footer(text="(en vrais si avez des idées de fonctionnalités je prend 🙃)")
             await message.channel.send(embed=embed)
 
         if message.content.lower().startswith("salut le bot"):
             await message.channel.send("Yo {} :hand_splayed:".format(message.author.mention))
 
-        if message.content.startswith("!mute"):
-            self.getMember(message.content.split(' ')[1])
-
+        
+                
         if message.content.lower().startswith("idtouser"):
             await message.channel.send(self.getMember(message.content[9:])) 
 
