@@ -204,8 +204,8 @@ class MyClient(discord.Client):
 
         if message.content.lower().startswith("salut le bot"):
             await message.channel.send("Yo {} :hand_splayed:".format(message.author.mention))
-
-        
+        if message.content.lower().startswith("good boy"):
+            await message.channel.send("Je suis le seul est unique good boy")
                 
         if message.content.lower().startswith("idtouser"):
             await message.channel.send(self.getMember(message.content[9:])) 
