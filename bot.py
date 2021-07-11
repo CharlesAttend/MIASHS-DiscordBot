@@ -3,6 +3,7 @@
 import discord, logging
 import config
 import json, urllib.request
+from os import system
 from random import choice
 
 class MyClient(discord.Client):
@@ -219,6 +220,12 @@ class MyClient(discord.Client):
                 await message.channel.send(content='Deleted {} message(s)'.format(len(deleted)), delete_after=3)
             else:
                 await message.channel.send("T'as pas le droit cheh")
+        
+        if message.content.lower().startswith("startmcserver"):
+            msg = system("/home/charles/wol.sh"):
+            await message.channel.send(f"Command exited with status {msg}")
+            
+
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)
