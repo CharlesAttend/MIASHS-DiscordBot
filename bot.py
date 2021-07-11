@@ -222,7 +222,7 @@ class MyClient(discord.Client):
                 await message.channel.send("T'as pas le droit cheh")
         
         if message.content.lower().startswith("startmcserver"):
-            msg = system("/home/charles/wol.sh"):
+            msg = system("/home/charles/wol.sh")
             await message.channel.send(f"Command exited with status {msg}")
             
 
