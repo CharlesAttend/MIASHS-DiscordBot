@@ -175,7 +175,7 @@ class MyClient(discord.Client):
             await message.channel.send(self.extractJson())
         
         #MEMES
-        if message.content.lower().startswith("wtf"):
+        if mesasge.content.lower().startswith("wtf"):
             imgList3= ["img/wtf.gif", "img/wtf2.gif"]
             await message.channel.send(file=discord.File(choice(imgList3)))
         #
@@ -198,7 +198,7 @@ class MyClient(discord.Client):
             embed=discord.Embed(title="Help du bot", description="Petit appercu de ce petit bot un peu useless (https://github.com/CharlesAttend/MIASHS-DiscordBot)", color=0xffc800)
             embed.add_field(name="memes", value="`wtf` | `fbi` | `police` | `excuse me wtf` | `eh eh boi`", inline=True)
             embed.add_field(name="Minecraft (y'a plus de serveur pour l'instant)", value="`comment va le serveur ?`", inline=False)
-            embed.add_field(name="Utility", value="`salut le bot` | `!help`", inline=True)
+            embed.add_field(name="Utility", value="`salut le bot` | `!help` | `choice`", inline=True)
             embed.add_field(name="Admin", value="`idtouser` | `plscleanchan` | `!mute/!unmute + id`", inline=True)
             embed.set_footer(text="(en vrais si avez des idées de fonctionnalités je prend 🙃)")
             await message.channel.send(embed=embed)
@@ -224,7 +224,9 @@ class MyClient(discord.Client):
         if message.content.lower().startswith("startmcserver"):
             msg = system("/home/charles/wol.sh")
             await message.channel.send(f"Command exited with status {msg}")
-            
+
+        if message.content.lower().startswith("choice"):
+            await message.channel.send(choice(message.content.split(" ")[1:]))
 
 
 logger = logging.getLogger('discord')
