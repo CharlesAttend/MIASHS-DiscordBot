@@ -175,7 +175,7 @@ class MyClient(discord.Client):
             await message.channel.send(self.extractJson())
         
         #MEMES
-        if mesasge.content.lower().startswith("wtf"):
+        if message.content.lower().startswith("wtf"):
             imgList3= ["img/wtf.gif", "img/wtf2.gif"]
             await message.channel.send(file=discord.File(choice(imgList3)))
         #
