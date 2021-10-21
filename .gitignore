@@ -1,5 +1,6 @@
-config.py
-config.py.exemple
+config.json
+config.json.exemple
 discord.log
 .vscode/
-__pycache__/
+node_modules
+.env
