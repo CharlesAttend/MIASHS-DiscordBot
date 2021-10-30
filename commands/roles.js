@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageActionRow, MessageSelectMenu, Collection } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 const YearsRow = new MessageActionRow()
 	.addComponents(
@@ -82,7 +82,7 @@ module.exports = {
 				i.deferUpdate();
 				return i.user.id === interaction.user.id;
 			};
-			// asking current years and waiting for reply 
+			// asking current years and waiting for reply
 			const message = await interaction.reply({ content: 'Choisie ton années ! 🔢', ephemeral: true, components: [YearsRow], fetchReply: true });
 			const years = await message.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 });
 			// asking option and waiting for reply
