@@ -1,13 +1,13 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-	name: 'guildMemberAdd',
+	name: 'guildMemberRemove',
 	async execute(member) {
-		console.log('New member');
-		const welcomeMessage = new MessageEmbed()
-			.setTitle(`Bienvenu ${member.displayName} !`)
+		console.log('Removed member');
+		const goodbyeMessage = new MessageEmbed()
+			.setTitle(`Goodbye ${member.user.username} 😔`)
 			.setColor(Math.floor(Math.random() * 16777215).toString(16))
-			.setDescription('Choisis tes rôles avec la commande **/roles** !')
+			.setDescription('Nous avons encore perdu un soldat...')
 			.setFooter('Discord de la Licence MIASHS')
 			.setThumbnail(member.user.avatarURL({ size: 1024 }))
 			.setAuthor(member.client.user.username, member.client.user.displayAvatarURL(), 'https://github.com/CharlesAttend/MIASHS-DiscordBot/')
@@ -16,6 +16,6 @@ module.exports = {
 
 		// debug :
 		// const channel = await member.guild.channels.fetch('459804994267381760');
-		await channel.send({ content: `${member}`, embeds: [welcomeMessage] });
+		await channel.send({ embeds: [goodbyeMessage] });
 	},
 };
