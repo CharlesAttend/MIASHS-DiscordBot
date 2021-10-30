@@ -20,7 +20,7 @@ module.exports = {
 		console.log(choice);
 		if (choice === 'ehehboi') {
 			await interaction.reply({ files: [EhehImageList[Math.floor(Math.random() * EhehImageList.length)]] });
-		} 
+		}
 		else if (choice === 'excusemewtf') {
 			await interaction.reply({ files: [ExcusemeImageList[Math.floor(Math.random() * ExcusemeImageList.length)]] });
 		}
