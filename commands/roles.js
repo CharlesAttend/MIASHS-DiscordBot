@@ -81,7 +81,7 @@ module.exports = {
 				return i.user.id === interaction.user.id;
 			};
 			// asking current years and waiting for reply 
-			const message = await interaction.reply({ content: 'Choisie ton années ! 🔢', ephemeral: false, components: [YearsRow], fetchReply: true });
+			const message = await interaction.reply({ content: 'Choisie ton années ! 🔢', ephemeral: true, components: [YearsRow], fetchReply: true });
 			const years = await message.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 });
 			// asking option and waiting for reply
 			await interaction.editReply({ content: 'Maintenant choisie ton parcourt ! 🔀', ephemeral: true, components: [OptionRow] });
