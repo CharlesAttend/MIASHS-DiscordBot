@@ -1,2 +1,6 @@
 # MIASHS-Discord-Bot
-Put your token in config.py ;)
+TO DO
+- Logging everything correctly
+- Mute command
+- Help command
+- Role colors selection
