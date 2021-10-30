@@ -80,14 +80,14 @@ module.exports = {
 			return i.user.id === interaction.user.id;
 		};
 		// asking current years and waiting for reply 
-		const message = await interaction.reply({ content: 'Choisie ton années !', ephemeral: true, components: [YearsRow], fetchReply: true });
+		const message = await interaction.reply({ content: 'Choisie ton années ! 🔢', ephemeral: true, components: [YearsRow], fetchReply: true });
 		const years = await message.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 });
 		// asking option and waiting for reply
-		await interaction.editReply({ content: 'Choisie ton parcourt !', ephemeral: false, components: [OptionRow] });
+		await interaction.editReply({ content: 'Maintenant choisie ton parcourt ! 🔀', ephemeral: false, components: [OptionRow] });
 		const option = await message.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 });
 		// setting roles
 		await setRole(interaction, years.values, option.values);
 		// validating
-		await interaction.editReply({ content: 'Tes rôles ont été actualisé', ephemeral: false, components: [OptionRow] });
+		await interaction.editReply({ content: 'Tes rôles ont été actualisé ✅', ephemeral: false, components: [OptionRow] });
 	},
 };
