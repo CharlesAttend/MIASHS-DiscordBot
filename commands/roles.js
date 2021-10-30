@@ -56,15 +56,17 @@ const OptionRow = new MessageActionRow()
 
 const setRole = async (interaction, years, option) => {
 	const roles = {
-		// 'SC': await interaction.guild.roles.fetch('622725595976957955'),
-		// 'Eco': await interaction.guild.roles.fetch('738833398096986134'),
-		// 'MSID' : await interaction.guild.roles.fetch('626693895421558784'),
-		// 'Non-Miashs' : await interaction.guild.roles.fetch('626693895421558784'),
-		// 'L1': await interaction.guild.roles.fetch('738818487480483920'),
-		// 'L2': await interaction.guild.roles.fetch('738818587292074104'),
-		// 'L3': await interaction.guild.roles.fetch('738833214021566556'),
-		'L1': await interaction.guild.roles.fetch('459809474371125250'),
-		'Eco': await interaction.guild.roles.fetch('738854612294959144'),
+		'SC': await interaction.guild.roles.fetch('622725595976957955'),
+		'Eco': await interaction.guild.roles.fetch('738833398096986134'),
+		'MSID' : await interaction.guild.roles.fetch('904091574890278963'),
+		'Non-Miashs' : await interaction.guild.roles.fetch('626693895421558784'),
+		'L1': await interaction.guild.roles.fetch('738818487480483920'),
+		'L2': await interaction.guild.roles.fetch('738818587292074104'),
+		'L3': await interaction.guild.roles.fetch('738833214021566556'),
+
+		// For testing purpose
+		// 'L1': await interaction.guild.roles.fetch('459809474371125250'),
+		// 'Eco': await interaction.guild.roles.fetch('738854612294959144'),
 	};
 	await interaction.member.roles.remove(Object.values(roles));
 	await interaction.member.roles.add([roles[years], roles[option]]);
