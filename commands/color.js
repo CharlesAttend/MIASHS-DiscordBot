@@ -9,6 +9,7 @@ const setRole = async (interaction, role) => {
 };
 
 module.exports = {
+	colorRoleList: colorRoleList,
 	data: new SlashCommandBuilder()
 		.setName('color')
 		.setDescription('Choose a color !')
