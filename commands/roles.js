@@ -91,7 +91,7 @@ module.exports = {
 			// setting roles
 			await setRole(interaction, years.values, option.values);
 			// validating
-			await interaction.editReply({ content: 'Tes rôles ont été actualisé ✅', ephemeral: true });
+			await interaction.editReply({ content: 'Tes rôles ont été actualisé ✅', ephemeral: true, components: [] });
 		}
 		catch (error) {
 			console.log(error);
