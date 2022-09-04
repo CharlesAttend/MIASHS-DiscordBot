@@ -39,7 +39,7 @@ module.exports = {
 				// await ssh.connect(login);
 				// const { stdout, stderr } = await ssh.execCommand('./wol.sh');
 				// console.log(stderr + '\n', stdout);
-				cp.exec('~/wol.sh', (error, stdout, stderr) => {
+				exec('~/wol.sh', (error, stdout, stderr) => {
 					// catch err, stdout, stderr
 					if (error) {
 						console.log('Error in wol.sh');
