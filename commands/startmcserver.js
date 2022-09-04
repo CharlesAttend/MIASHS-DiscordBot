@@ -42,22 +42,20 @@ module.exports = {
 				cp.exec('~/wol.sh', (error, stdout, stderr) => {
 					// catch err, stdout, stderr
 					if (error) {
-						const message = await interaction.editReply({ content: "Une erreur s'est produite: \n" + error, components: [row], fetchReply: true });
-						console.log('Error in removing files');
+						console.log('Error in wol.sh');
 						return;
 					}
 					else if (stderr) {
-						const message = await interaction.editReply({ content: "Une erreur s'est produite : \n" + stderr, components: [row], fetchReply: true });
-						console.log('an error with file system');
+						console.log('an error with file system during wol');
 						return;
 					}
 					else {
 						console.log('Result of shell script execution', stdout);
-						const message = await interaction.editReply({ content: 'Packet WOL envoyé ! Pensez à éteindre mon ordinateur via Parsec une fois terminé ;)', components: [row], fetchReply: true });
-						await message.awaitMessageComponent({ filter, time: 60000, componentType: 'BUTTON' });
-						await interaction.editReply({ content: 'Merci beaucoup !!!', components: [] });
 					}
 				});
+				const message = await interaction.editReply({ content: 'Packet WOL envoyé ! Pensez à éteindre mon ordinateur via Parsec une fois terminé ;)', components: [row], fetchReply: true });
+				await interaction.editReply({ content: 'Merci beaucoup !!!', components: [] });
+				await message.awaitMessageComponent({ filter, time: 60000, componentType: 'BUTTON' });
 			}
 			else {
 				// eslint-disable-next-line quotes
