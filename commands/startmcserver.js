@@ -1,14 +1,18 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { NodeSSH } = require('node-ssh');
-require('dotenv').config();
+// const { NodeSSH } = require('node-ssh');
+// require('dotenv').config();
 
-const ssh = new NodeSSH();
-const login = {
-	host: process.env.IP_ADDRESS,
-	username: process.env.USERNAME,
-	password: process.env.PASSWORD,
-};
+// const ssh = new NodeSSH();
+// const login = {
+// 	host: process.env.IP_ADDRESS,
+// 	username: process.env.USERNAME,
+// 	password: process.env.PASSWORD,
+// };
+
+const { exec } = require("child_process");
+
+
 const row = new MessageActionRow()
 	.addComponents(
 		new MessageButton()
@@ -32,12 +36,28 @@ module.exports = {
 			// Serveur de l'élite or I'm gay
 			if (interaction.guildId === '697903202586067035' || interaction.guildId === '459801881296764928') {
 				await interaction.reply('Démarrage en cours...');
-				await ssh.connect(login);
-				const { stdout, stderr } = await ssh.execCommand('./wol.sh');
-				console.log(stderr + '\n', stdout);
-				const message = await interaction.editReply({ content: 'Packet WOL envoyé ! Pensez à éteindre mon ordinateur via Parsec une fois terminé ;)', components: [row], fetchReply: true });
-				await message.awaitMessageComponent({ filter, time: 60000, componentType: 'BUTTON' });
-				await interaction.editReply({ content: 'Merci beaucoup !!!', components: [] });
+				// await ssh.connect(login);
+				// const { stdout, stderr } = await ssh.execCommand('./wol.sh');
+				// console.log(stderr + '\n', stdout);
+				cp.exec('~/wol.sh', (error, stdout, stderr) => {
+					// catch err, stdout, stderr
+					if (error) {
+						const message = await interaction.editReply({ content: "Une erreur s'est produite: \n" + error, components: [row], fetchReply: true });
+						console.log('Error in removing files');
+						return;
+					}
+					else if (stderr) {
+						const message = await interaction.editReply({ content: "Une erreur s'est produite : \n" + stderr, components: [row], fetchReply: true });
+						console.log('an error with file system');
+						return;
+					}
+					else {
+						console.log('Result of shell script execution', stdout);
+						const message = await interaction.editReply({ content: 'Packet WOL envoyé ! Pensez à éteindre mon ordinateur via Parsec une fois terminé ;)', components: [row], fetchReply: true });
+						await message.awaitMessageComponent({ filter, time: 60000, componentType: 'BUTTON' });
+						await interaction.editReply({ content: 'Merci beaucoup !!!', components: [] });
+					}
+				});
 			}
 			else {
 				// eslint-disable-next-line quotes
