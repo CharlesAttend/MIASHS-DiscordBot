@@ -42,20 +42,20 @@ module.exports = {
 				exec('~/wol.sh', (error, stdout, stderr) => {
 					// catch err, stdout, stderr
 					if (error) {
-						console.log('Error in wol.sh');
+						console.log('Error in wol.sh:', error);
 						return;
 					}
 					else if (stderr) {
-						console.log('an error with file system during wol');
+						console.log('an error with file system during wol:', stderr);
 						return;
 					}
 					else {
-						console.log('Result of shell script execution', stdout);
+						console.log('Result of shell script execution:', stdout);
 					}
 				});
 				const message = await interaction.editReply({ content: 'Packet WOL envoyé ! Pensez à éteindre mon ordinateur via Parsec une fois terminé ;)', components: [row], fetchReply: true });
-				await interaction.editReply({ content: 'Merci beaucoup !!!', components: [] });
 				await message.awaitMessageComponent({ filter, time: 60000, componentType: 'BUTTON' });
+				await interaction.editReply({ content: 'Merci beaucoup !!!', components: [] });
 			}
 			else {
 				// eslint-disable-next-line quotes
