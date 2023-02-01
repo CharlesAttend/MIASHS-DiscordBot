@@ -12,10 +12,15 @@ module.exports = {
 			.setThumbnail(member.user.avatarURL({ size: 1024 }))
 			.setAuthor(member.client.user.username, member.client.user.displayAvatarURL(), 'https://github.com/CharlesAttend/MIASHS-DiscordBot/')
 			.setTimestamp();
-		const channel = await member.guild.channels.fetch('623826045186998313');
 
-		// debug :
-		// const channel = await member.guild.channels.fetch('459804994267381760');
-		await channel.send({ content: `${member}`, embeds: [welcomeMessage] });
+		try {
+			const channel = await member.guild.channels.fetch('623826045186998313');
+			// debug dans i'm gay:
+			// const channel = await member.guild.channels.fetch('459804994267381760');
+			await channel.send({ content: `${member}`, embeds: [welcomeMessage] });
+		}
+		catch(err) {
+			return 0;
+		}
 	},
 };
